@@ -15,7 +15,7 @@ import (
 	"github.com/tim06/sing-box/common/urltest"
 	C "github.com/tim06/sing-box/constant"
 	"github.com/tim06/sing-box/experimental/deprecated"
-	"github.com/tim06/sing-box/experimental/libbox/internal/procfs"
+	//"github.com/tim06/sing-box/experimental/libbox/internal/procfs"
 	"github.com/tim06/sing-box/experimental/libbox/platform"
 	"github.com/tim06/sing-box/log"
 	"github.com/tim06/sing-box/option"
@@ -210,7 +210,7 @@ func (w *platformInterfaceWrapper) ReadWIFIState() adapter.WIFIState {
 func (w *platformInterfaceWrapper) FindProcessInfo(ctx context.Context, network string, source netip.AddrPort, destination netip.AddrPort) (*process.Info, error) {
 	var uid int32
 	if w.useProcFS {
-		uid = procfs.ResolveSocketByProcSearch(network, source, destination)
+		uid = -1//procfs.ResolveSocketByProcSearch(network, source, destination)
 		if uid == -1 {
 			return nil, E.New("procfs: not found")
 		}

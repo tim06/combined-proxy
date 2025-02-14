@@ -1,5 +1,5 @@
 package combinedproxy
 
-func Test() {
-
+func Test() string {
+    return "Test"
 }

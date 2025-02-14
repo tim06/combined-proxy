@@ -34,9 +34,9 @@ jobs:
       uses: nttld/setup-ndk@v1
       id: setup-ndk
       with:
-        ndk-version: r23
+        ndk-version: r24
         add-to-path: true
-        link-to-sdk: false
+        link-to-sdk: true
         local-cache: true
 
     - name: Build
@@ -47,7 +47,7 @@ jobs:
       env:
         ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
 
-    - name: Upload AndroidLibXrayLite to release
+    - name: Upload binaries to release
       if: github.event.inputs.release_tag != ''
       uses: svenstaro/upload-release-action@v2
       with:

@@ -48,9 +48,8 @@ jobs:
         ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
 
     - name: Upload binaries to release
-      if: github.event.inputs.release_tag != ''
       uses: svenstaro/upload-release-action@v2
       with:
         file: ./*r
-        tag: ${{ github.event.inputs.release_tag }}
+        tag: "v0.0.1"
         file_glob: true

@@ -43,7 +43,7 @@ jobs:
       run: |
          gomobile init
          go mod tidy
-         gomobile bind -target android
+         gomobile bind -androidapi 21 -javapkg com.tim -libname combined
       env:
         ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
 

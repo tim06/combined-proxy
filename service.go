@@ -9,6 +9,15 @@ import (
 	"syscall"
 	"time"
 
+	"github.com/sagernet/sing-tun"
+	"github.com/sagernet/sing/common"
+	"github.com/sagernet/sing/common/control"
+	E "github.com/sagernet/sing/common/exceptions"
+	"github.com/sagernet/sing/common/logger"
+	N "github.com/sagernet/sing/common/network"
+	"github.com/sagernet/sing/service"
+	"github.com/sagernet/sing/service/filemanager"
+	"github.com/sagernet/sing/service/pause"
 	"github.com/tim06/sing-box"
 	"github.com/tim06/sing-box/adapter"
 	"github.com/tim06/sing-box/common/process"
@@ -19,15 +28,6 @@ import (
 	"github.com/tim06/sing-box/experimental/libbox/platform"
 	"github.com/tim06/sing-box/log"
 	"github.com/tim06/sing-box/option"
-	"github.com/sagernet/sing-tun"
-	"github.com/sagernet/sing/common"
-	"github.com/sagernet/sing/common/control"
-	E "github.com/sagernet/sing/common/exceptions"
-	"github.com/sagernet/sing/common/logger"
-	N "github.com/sagernet/sing/common/network"
-	"github.com/sagernet/sing/service"
-	"github.com/sagernet/sing/service/filemanager"
-	"github.com/sagernet/sing/service/pause"
 )
 
 type BoxService struct {
@@ -103,8 +103,8 @@ var (
 )
 
 type platformInterfaceWrapper struct {
-	iif         PlatformInterface
-	useProcFS   bool
+	iif       PlatformInterface
+	useProcFS bool
 	router      adapter.Router
 	openURLFunc func(url string)
 }

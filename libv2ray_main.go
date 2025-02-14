@@ -1,4 +1,4 @@
-package combinedproxy
+package libbox
 
 import (
 	"context"

@@ -1,0 +1,56 @@
+name: Build
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        required: false
+        type: string
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Setup Golang
+      uses: actions/setup-go@v5
+      with:
+        go-version-file: 'go.mod'
+
+    - name: Install gomobile
+      run: |
+        go install golang.org/x/mobile/cmd/gomobile@latest
+        export PATH=$PATH:~/go/bin
+        
+    - name: Setup Android NDK
+      uses: nttld/setup-ndk@v1
+      id: setup-ndk
+      with:
+        ndk-version: r27
+        add-to-path: true
+        link-to-sdk: true
+        local-cache: true
+
+    - name: Build
+      run: |
+         gomobile init
+         go mod tidy
+         gomobile bind -target android
+      env:
+        ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
+
+    - name: Upload AndroidLibXrayLite to release
+      if: github.event.inputs.release_tag != ''
+      uses: svenstaro/upload-release-action@v2
+      with:
+        file: ./*r
+        tag: ${{ github.event.inputs.release_tag }}
+        file_glob: true

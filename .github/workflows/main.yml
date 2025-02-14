@@ -14,7 +14,7 @@ on:
       - main
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
 
     - name: Checkout repository
@@ -43,7 +43,7 @@ jobs:
       run: |
          gomobile init
          go mod tidy
-         gomobile bind -androidapi 21 -javapkg com.tim
+         gomobile bind -androidapi 21 -javapkg com.tim -o box.aar
       env:
         ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
 
@@ -53,3 +53,7 @@ jobs:
         file: ./*r
         tag: "v0.0.1"
         file_glob: true
+
+    - uses: actions/upload-artifact@v4
+      with:
+        name: box.aar

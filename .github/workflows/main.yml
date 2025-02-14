@@ -14,7 +14,7 @@ on:
       - main
 jobs:
   build:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
 
     - name: Checkout repository
@@ -37,7 +37,7 @@ jobs:
         ndk-version: r24
         add-to-path: true
         link-to-sdk: true
-        local-cache: true
+        local-cache: false
 
     - name: Build
       run: |

@@ -1,13 +1,14 @@
-//go:build linux
+//go:build unix
+
 package libbox
 
-/* import (
+import (
 	"net"
 	"syscall"
-) */
+)
 
 // copied from net.linkFlags
-/* func linkFlags(rawFlags uint32) net.Flags {
+func linkFlags(rawFlags uint32) net.Flags {
 	var f net.Flags
 	if rawFlags&syscall.IFF_UP != 0 {
 		f |= net.FlagUp
@@ -28,4 +29,4 @@ package libbox
 		f |= net.FlagMulticast
 	}
 	return f
-} */
+}
